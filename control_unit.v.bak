@@ -1,0 +1,186 @@
+module control_unit
+(
+	input [5:0] opcode, func,
+	output reg branch, MemRead, MemtoReg, MemWrite, ALUSrc, RegWrite, RegDest, jump, jal, bneq,
+	output reg [3:0] ALUOp
+);
+	
+	always @ (*) begin
+	
+
+		
+		// I-Type Instructions
+		
+		// addi 
+		if (opcode == 6'b001000) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0001;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// addiu 
+		else if (opcode == 6'b001001) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0010;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// andi 
+		else if (opcode == 6'b001100) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0011;
+			bneq = 1'b0;
+			jal = 1'b0;
+			
+		end
+		// beq tamam
+		else if (opcode == 6'b000100) begin
+			jump = 1'b0;
+			branch = 1'b1;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b0;
+			RegWrite = 1'b0;
+			RegDest = 1'b0;
+			ALUOp = 4'b1010;
+			bneq = 1'b0;
+			jal = 1'b0;
+			
+		end
+		// bneq 
+		else if (opcode == 6'b000101) begin
+			jump = 1'b0;
+			branch = 1'b1;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b0;
+			RegDest = 1'b0;
+			ALUOp = 4'b1010;
+			bneq = 1'b1;
+			jal = 1'b0;
+		end
+		// ll
+		else if (opcode == 6'b110000) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b1001;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// lui
+		else if (opcode == 6'b001111) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b1101;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// lw tamam
+		else if (opcode == 6'b100011) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b1;
+			MemtoReg = 1'b1;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0001;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		
+		// ori 
+		else if (opcode == 6'b001101) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0100;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// slti 
+		else if (opcode == 6'b001010) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0111;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// sltui 
+		else if (opcode == 6'b001011) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b0;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b1;
+			RegDest = 1'b0;
+			ALUOp = 4'b0110;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+		// sw
+		else if (opcode == 6'b101011) begin
+			jump = 1'b0;
+			branch = 1'b0;
+			MemRead = 1'b0;
+			MemtoReg = 1'b0;
+			MemWrite = 1'b1;
+			ALUSrc = 1'b1;
+			RegWrite = 1'b0;
+			RegDest = 1'b0;
+			ALUOp = 4'b0001;
+			bneq = 1'b0;
+			jal = 1'b0;
+		end
+	end
+endmodule

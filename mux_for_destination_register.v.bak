@@ -1,0 +1,11 @@
+module mux_for_destination_register( DataOut,Data0, Data1, Select);
+output [4:0] DataOut; // Data Out
+input [4:0] Data0, Data1; // Data In 1 and 2
+input Select;
+mux2_1 mux0(DataOut[0],Data0[0],Data1[0],Select);
+mux2_1 mux1(DataOut[1],Data0[1],Data1[1],Select);
+mux2_1 mux2(DataOut[2],Data0[2],Data1[2],Select);
+mux2_1 mux3(DataOut[3],Data0[3],Data1[3],Select);
+mux2_1 mux4(DataOut[4],Data0[4],Data1[4],Select);
+
+endmodule
